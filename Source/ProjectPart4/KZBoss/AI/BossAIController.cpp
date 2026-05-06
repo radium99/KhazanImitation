@@ -23,6 +23,8 @@ void ABossAIController::OnPossess(APawn* InPawn)
         // 1. 블랙보드 사용 시작
         if (UseBlackboard(BTBoss->BlackboardAsset, BlackboardComp))
         {
+            BlackboardComp->SetValueAsFloat(FName("Distance"), 99999.0f);
+            
             // 2. 행동트리 실행
             RunBehaviorTree(BTBoss);
 
@@ -35,6 +37,7 @@ void ABossAIController::OnPossess(APawn* InPawn)
 
             // 4. 플레이어 타겟 설정 (지연 실행 포함)
             RetrySetTarget();
+            
         }
     }
 }

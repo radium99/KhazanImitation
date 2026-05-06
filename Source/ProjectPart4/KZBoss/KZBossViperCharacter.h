@@ -19,6 +19,14 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	// 공격 실행 함수 (몽타주 재생)
+	UFUNCTION(BluePrintCallable, Category="Combat")
+	void PlayAttackMontage();
+
+	UPROPERTY(EditAnywhere, BluePrintReadWrite, Category="Combat")
+	class UAnimMontage* BasicAttackMontage;
+
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
