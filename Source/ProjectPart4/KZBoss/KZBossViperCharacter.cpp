@@ -4,7 +4,8 @@
 #include "KZBoss/KZBossViperCharacter.h"
 #include "AIController.h"
 #include "BehaviorTree/BlackboardComponent.h"
-
+#include "GameFramework/CharacterMovementComponent.h"
+//#include "BTTaskNode.generate.h"
 
 // Sets default values
 AKZBossViperCharacter::AKZBossViperCharacter()
@@ -15,6 +16,9 @@ AKZBossViperCharacter::AKZBossViperCharacter()
 	// 변수 초기화
 	CurrentSpeed = 0.0f;
 	CurrentPhase = EBossPhase::Phase1_Normal_A;
+
+	// 루트 모션 사용 시 물리 회전/이동 허용
+	GetCharacterMovement()->bAllowPhysicsRotationDuringAnimRootMotion = true;
 }
 
 // Called when the game starts or when spawned
@@ -59,6 +63,8 @@ void AKZBossViperCharacter::PlayAttackMontage()
 					{
 						AIC->GetBlackboardComponent()->SetValueAsBool(FName("isAttacking"), false);
 					}
+
+					//FinishLatentTask(OwnerComp, EBTNodeResult::Succeeded);
 				});
 	
 			AnimInstance->Montage_SetEndDelegate(EndDelegate, BasicAttackMontage);
